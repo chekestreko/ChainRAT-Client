@@ -19,12 +19,22 @@ public class IOSocket {
     private String IP = "192.168.0.238";
     private int port = 4467;
     private String packet;
+    //region Get
+    public String getIP() {
+        return IP;
+    }
+
+    public int getPort() {
+        return port;
+    }
+    //endregion
 
     Socket socket;
     Scanner inStream;
 
-    public void IOSocket(){
-
+    public IOSocket(String IP, int port){
+        this.IP = IP;
+        this.port = port;
     }
 
     public void connect(){
